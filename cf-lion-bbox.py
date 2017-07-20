@@ -27,8 +27,8 @@ object_radius = 0.5 * max(object.bound_box.data.dimensions.x, object.bound_box.d
 object_height = object.bound_box.data.dimensions.z
 
 # Parameters
-cylinder_radius = object_radius + 5 #50
-cylinder_thickness = 2
+cylinder_radius = object_radius * 2 #50
+cylinder_thickness = 0.05
 cylinder_height = object_height #100
 cyliner_position = object_location #(0, 0, 0)
 
