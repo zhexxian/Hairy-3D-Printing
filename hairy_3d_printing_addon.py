@@ -1,7 +1,36 @@
+bl_info = {
+    "name": "Hairy 3D Print",
+    "description": "Hairify stl file that can be printed by FDM 3D printers.",
+    "author": "Shun Yu, Nigel, Zhexian",
+    "version": (1, 0),
+    "blender": (2, 78, 0),
+    "location": "View3D > Add > Hair",
+    "warning": "", # used for warning icon and text in addons panel
+    "wiki_url": "", #"http://wiki.blender.org/index.php/Extensions:2.6/Py/"
+                #"Scripts/My_Script",
+    "tracker_url": "",#"https://developer.blender.org/maniphest/task/edit/form/2/",
+    "support": "COMMUNITY",
+    "category": "Add Mesh"
+    }
+
 import bpy
 from mathutils import Vector
 
-class AutomaticMode(bpy.types.Operator):
+class AutomaticMode(bpy.types.Panel):
+    bl_idname = "OBJECT_PT_hairify"
+    bl_label = "Hairy 3D Print"
+    bl_space_type = "VIEW_3D"
+    bl_region_type = "TOOLS"
+
+    @classmethod
+    def poll(self, context):
+        return (bpy.context.mode == 'OBJECT' or bpy.context.mode == "EDIT_MESH")
+
+    def draw(self, context):
+        layout = self.layout
+        col = layout.column(align=True)
+        col.operator("mesh.primitive_plane_add", icon="PLUS")
+    '''
     # Get parameters of object
     object = bpy.context.object
     object_location = object.location
@@ -98,8 +127,7 @@ class AutomaticMode(bpy.types.Operator):
     cylinder_outer_outer.select = True
     bpy.ops.object.delete()
     #########################################################
-    bl_idname = "object.simple_operator"
-    bl_label = "Tool Name"
+    '''
 
 def register():
     bpy.utils.register_class(AutomaticMode)
@@ -109,3 +137,4 @@ def unregister():
 
 if __name__ == "__main__":
     register()
+
