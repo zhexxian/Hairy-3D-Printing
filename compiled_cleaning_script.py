@@ -1,7 +1,7 @@
 import bpy
 from mathutils import Vector
 
-class AutomaticMode(bpy.types.Panel):
+class AutomaticMode(bpy.types.Operator):
     # Get parameters of object
     object = bpy.context.object
     object_location = object.location
@@ -98,5 +98,15 @@ class AutomaticMode(bpy.types.Panel):
     cylinder_outer_outer.select = True
     bpy.ops.object.delete()
     #########################################################
+    bl_idname = "object.simple_operator"
+    bl_label = "Tool Name"
 
-bpy.utils.register_class(AutomaticMode)
+def register():
+    bpy.utils.register_class(AutomaticMode)
+
+def unregister():
+    bpy.utils.unregister_class(AutomaticMode)
+
+if __name__ == "__main__":
+    register()
+
