@@ -4,7 +4,7 @@ bl_info = {
     "author": "Shun Yu, Nigel, Zhexian",
     "version": (1, 0),
     "blender": (2, 78, 0),
-    "location": "View3D > Add > Hair",
+    "location": "View3D > UI panel > Add hair",
     "warning": "", # used for warning icon and text in addons panel
     "wiki_url": "", #"http://wiki.blender.org/index.php/Extensions:2.6/Py/"
                 #"Scripts/My_Script",
@@ -18,7 +18,7 @@ from mathutils import Vector
 
 class AutomaticMode(bpy.types.Operator):
     bl_idname = "object.hairfy"
-    bl_label = "Hairy 3D Print"
+    bl_label = "Hairy 3D Print (Automatic Mode)"
     # bl_space_type = "VIEW_3D"
     # bl_region_type = "TOOLS"
     bl_options = {'REGISTER', 'UNDO'}  # enable undo for the operator.
@@ -132,11 +132,17 @@ class AutomaticMode(bpy.types.Operator):
 
         return {'FINISHED'}            # this lets blender know the operator finished successfully.
     
+def menu_func(self, context):
+    self.layout.operator(AutomaticMode.bl_idname)
+
 def register():
-    bpy.utils.register_class(AutomaticMode)
+    # bpy.utils.register_class(AutomaticMode)
+    bpy.utils.register_module(__name__)
+    bpy.types.VIEW3D_MT_object.append(menu_func)
 
 def unregister():
-    bpy.utils.unregister_class(AutomaticMode)
+    # bpy.utils.unregister_class(AutomaticMode)
+    bpy.utils.unregister_module(__name__)
 
 if __name__ == "__main__":
     register()
